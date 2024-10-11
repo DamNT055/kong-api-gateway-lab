@@ -1,0 +1,30 @@
+services:
+    api-service-1:
+      build:
+        context: ./api-service-1
+        dockerfile: Dockerfile
+      container_name: api-service-1
+      working_dir: /usr/src/app
+      volumes:
+        - ./api-service-1:/usr/src/app
+      ports:
+        - "3001:3000"  # Mở cổng 3001 ra bên ngoài
+      networks:
+        - kong-api-gateway-lab_kong-net
+
+    api-service-2:
+      build:
+        context: ./api-service-2
+        dockerfile: Dockerfile
+      container_name: api-service-2
+      working_dir: /usr/src/app
+      volumes:
+        - ./api-service-2:/usr/src/app
+      ports:
+        - "3002:3000"  # Mở cổng 3002 ra bên ngoài
+      networks:
+        - kong-api-gateway-lab_kong-net
+
+networks:
+  kong-api-gateway-lab_kong-net:
+      external: true
